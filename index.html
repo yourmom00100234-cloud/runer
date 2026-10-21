@@ -489,17 +489,21 @@ function drawParticles() {
 let obstacles = [];
 class Obstacle {
     constructor() {
-        this.type = Math.random() < 0.6 ? 'LOW' : 'HIGH'; // LOW: Jump over, HIGH: Slide under
+        this.type = Math.random() < 0.5 ? 'LOW' : 'HIGH'; // 50% 확률로 점프/슬라이딩 구분
         this.x = CANVAS_WIDTH + 50;
-        this.width = 25 + Math.random() * 15;
         
         if (this.type === 'LOW') {
-            this.height = 35 + Math.random() * 15;
+            // 하단 장애물 (점프해서 피하기)
+            this.width = 25 + Math.random() * 15;
+            this.height = 35 + Math.random() * 10;
             this.y = groundY - this.height;
             this.color = '#ff0055';
         } else {
-            this.height = 80;
-            this.y = groundY - 100; // Leaving slide gap
+            // 상단 장애물 (숙여서 슬라이딩으로 피하기)
+            this.width = 40 + Math.random() * 20;
+            this.height = 100;
+            // 서 있을 때는 머리에 부딪히고, 숙였을 때만(높이 25px) 안 부딪히는 딱 좋은 높이
+            this.y = groundY - 50 - this.height + 20; 
             this.color = '#ff9900';
         }
     }
@@ -719,7 +723,7 @@ function gameLoop() {
 
         // Spawning Obstacles
         spawnTimer++;
-        if (spawnTimer > Math.max(40, 100 - gameSpeed * 3)) {
+        if (spawnTimer > Math.max(45, 110 - gameSpeed * 3)) {
             obstacles.push(new Obstacle());
             spawnTimer = 0;
         }
