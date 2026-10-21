@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Neon Runner 2D</title>
+    <!-- 구글 애드센스 스크립트 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2157167042014574"
+         crossorigin="anonymous"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -502,7 +505,6 @@ class Obstacle {
             // 상단 장애물 (숙여서 슬라이딩으로 피하기)
             this.width = 40 + Math.random() * 20;
             this.height = 100;
-            // 서 있을 때는 머리에 부딪히고, 숙였을 때만(높이 25px) 안 부딪히는 딱 좋은 높이
             this.y = groundY - 50 - this.height + 20; 
             this.color = '#ff9900';
         }
